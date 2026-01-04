@@ -3,14 +3,11 @@ services:
     container_name: caddy-reverse-proxy
     image: ghcr.io/tuyenhn/my-caddy:v2.10.2
     restart: unless-stopped
-    ports:
-      - "80:80"
-      - "443:443"
-      - "443:443/udp"
     volumes:
       - ./conf:/etc/caddy
       - caddy_data:/data
       - caddy_config:/config
+    network_mode: "host"
 
 volumes:
   caddy_data:
