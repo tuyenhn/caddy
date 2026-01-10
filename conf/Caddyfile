@@ -1,0 +1,82 @@
+{
+	email hntuyen282@gmail.com
+
+	log {
+		output file /etc/caddy/caddy.log
+		format json
+	}
+
+	acme_dns cloudflare GB2GdpDop8Gy1Y5r82Jha6obe6tNSPiH3Y-BgYlA
+}
+
+(immich_vm) {
+	reverse_proxy 192.168.1.13:80
+}
+
+(arrs_vm) {
+	reverse_proxy 192.168.1.38:80
+}
+
+*.homelab.tuyens.net {
+	encode
+
+	handle {
+		respond "No apps for this endpoint... yet!" 404
+	}
+}
+
+pve.homelab.tuyens.net {
+	reverse_proxy 192.168.1.212:80
+}
+
+immich.homelab.tuyens.net {
+	import immich_vm
+}
+
+backrest.homelab.tuyens.net {
+	import immich_vm
+}
+
+prowlarr.homelab.tuyens.net {
+	import arrs_vm
+}
+
+qbittorrent.homelab.tuyens.net {
+	import arrs_vm
+}
+
+radarr.homelab.tuyens.net {
+	import arrs_vm
+}
+
+sonarr.homelab.tuyens.net {
+	import arrs_vm
+}
+
+bazarr.homelab.tuyens.net {
+	import arrs_vm
+}
+
+jellyseerr.homelab.tuyens.net {
+	import arrs_vm
+}
+
+jellyfin.homelab.tuyens.net {
+	import arrs_vm
+}
+
+cleanuparr.homelab.tuyens.net {
+	import arrs_vm
+}
+
+racker host spdtest-tracker.homelab.tuyens.net {
+	import arrs_vm
+}
+
+profilarr.homelab.tuyens.net {
+	import arrs_vm
+}
+
+huntarr.homelab.tuyens.net {
+	import arrs_vm
+}
