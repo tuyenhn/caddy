@@ -7,6 +7,8 @@ services:
       - ./conf:/etc/caddy
       - caddy_data:/data
       - caddy_config:/config
+    environment:
+      - CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN}
     network_mode: "host"
 
 volumes:
