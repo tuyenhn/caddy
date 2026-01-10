@@ -6,7 +6,7 @@
 		format json
 	}
 
-	acme_dns cloudflare GB2GdpDop8Gy1Y5r82Jha6obe6tNSPiH3Y-BgYlA
+	acme_dns cloudflare {env.CLOUDFLARE_API_TOKEN}
 }
 
 (immich_vm) {

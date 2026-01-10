@@ -9,6 +9,8 @@ services:
       - caddy_config:/config
     ports: 
       - "80:8080"
+    environment:
+      - CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN}
 
 volumes:
   caddy_data:

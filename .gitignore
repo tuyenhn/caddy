@@ -1,3 +1,4 @@
+.env
 conf/*
 !conf/README
 !conf/Caddyfile
