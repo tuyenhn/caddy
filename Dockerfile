@@ -1,6 +1,11 @@
-FROM caddy:2.10.2-builder-alpine AS builder
+FROM dhi.io/golang:1.25-debian13-dev AS builder
+
+RUN CGO_ENABLED=0 go install github.com/caddyserver/xcaddy/cmd/xcaddy@latest
+
+WORKDIR /build
 RUN xcaddy build \
     --with github.com/caddy-dns/cloudflare
-FROM caddy:2.10.2-alpine
-COPY --from=builder /usr/bin/caddy /usr/bin/caddy
+
+FROM dhi.io/caddy:2.11.2-debian13
+COPY --from=builder /build/caddy /usr/local/bin/caddy
 
