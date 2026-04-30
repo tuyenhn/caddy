@@ -29,6 +29,18 @@ pve.homelab.tuyens.net {
 	reverse_proxy 192.168.1.212:80
 }
 
+ts-peer-relay.homelab.tuyens.net {
+	reverse_proxy 192.168.1.213:80
+}
+
+syncthing.homelab.tuyens.net {
+	reverse_proxy 192.168.1.60:80
+}
+
+dockhand.homelab.tuyens.net {
+	reverse_proxy 192.168.1.151:80
+}
+
 immich.homelab.tuyens.net {
 	import immich_vm
 }
@@ -69,14 +81,6 @@ cleanuparr.homelab.tuyens.net {
 	import arrs_vm
 }
 
-racker host spdtest-tracker.homelab.tuyens.net {
-	import arrs_vm
-}
-
 profilarr.homelab.tuyens.net {
-	import arrs_vm
-}
-
-huntarr.homelab.tuyens.net {
 	import arrs_vm
 }
