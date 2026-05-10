@@ -29,6 +29,10 @@ pve.homelab.tuyens.net {
 	reverse_proxy 192.168.1.212:80
 }
 
+budget.homelab.tuyens.net {
+	reverse_proxy 192.168.1.104:80
+}
+
 ts-peer-relay.homelab.tuyens.net {
 	reverse_proxy 192.168.1.213:80
 }
