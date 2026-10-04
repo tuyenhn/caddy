@@ -6,43 +6,36 @@
 		format json
 	}
 
-	acme_dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+	acme_dns cloudflare {file./run/secrets/cf_api_token}
 }
 
 (immich_vm) {
-	reverse_proxy 192.168.1.13:80
+	reverse_proxy 10.28.2.50:80
 }
 
 (arrs_vm) {
-	reverse_proxy 192.168.1.38:80
+	reverse_proxy 10.28.2.51:80
 }
 
 *.homelab.tuyens.net {
 	encode
 
 	handle {
-		respond "No apps for this endpoint... yet!" 404
+		abort
 	}
 }
 
 pve.homelab.tuyens.net {
-	reverse_proxy 192.168.1.212:80
-}
-
-budget.homelab.tuyens.net {
-	reverse_proxy 192.168.1.104:80
-}
-
-ts-peer-relay.homelab.tuyens.net {
-	reverse_proxy 192.168.1.213:80
+    reverse_proxy https://10.28.2.1:8006 {
+		transport http {
+			tls_trust_pool file /run/secrets/pve_root_ca
+			tls_server_name pve
+		}
+	}
 }
 
 syncthing.homelab.tuyens.net {
-	reverse_proxy 192.168.1.60:80
-}
-
-dockhand.homelab.tuyens.net {
-	reverse_proxy 192.168.1.151:80
+	reverse_proxy 10.28.2.52:80
 }
 
 immich.homelab.tuyens.net {
