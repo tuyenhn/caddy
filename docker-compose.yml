@@ -4,7 +4,7 @@ services:
     image: caddy:2.11.7
     restart: unless-stopped
     volumes:
-      - ./conf:/etc/caddy
+      - ./Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
       - caddy_config:/config
     ports: 
