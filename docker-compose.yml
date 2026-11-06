@@ -7,11 +7,17 @@ services:
       - ./sites.caddy:/etc/caddy/sites.caddy
       - caddy_data:/data
       - caddy_config:/config
-    ports: 
+    ports:
       - "80:80"
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    networks:
+      - proxy
 
 volumes:
   caddy_data:
   caddy_config:
+
+networks:
+  proxy:
+    external: true
