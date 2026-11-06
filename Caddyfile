@@ -1,44 +1,33 @@
 {
+	email hntuyen282@gmail.com
 
 	log {
 		format console
 	}
 
+	servers {
+		trusted_proxies static 10.28.2.55/32
+	}
 }
 
-http://jellyseerr.homelab.tuyens.net:80 {
-	reverse_proxy host.docker.internal:5055
+# Usage, in sites/*.caddy:
+#   import proxied_site <hostname> <upstream>
+(proxied_site) {
+	http://{args[0]}:80 {
+		@trusted remote_ip 10.28.2.55/32
+		handle @trusted {
+			reverse_proxy {args[1]}
+		}
+
+		handle {
+			respond "Not requesting from the correct proxy" 403
+		}
+	}
 }
 
-http://qbittorrent.homelab.tuyens.net:80 {
-	reverse_proxy host.docker.internal:8080
-}
+import sites.caddy
 
-http://prowlarr.homelab.tuyens.net:80 {
-	reverse_proxy prowlarr:9696
+# Anything else hitting :80 (bare IP, unknown Host) gets nothing.
+http://:80 {
+	abort
 }
-
-http://radarr.homelab.tuyens.net:80 {
-	reverse_proxy radarr:7878
-}
-
-http://sonarr.homelab.tuyens.net:80 {
-	reverse_proxy sonarr:8989
-}
-
-http://bazarr.homelab.tuyens.net:80 {
-	reverse_proxy bazarr:6767
-}
-
-http://jellyfin.homelab.tuyens.net:80 {
-	reverse_proxy jellyfin:8096
-}
-
-http://cleanuparr.homelab.tuyens.net:80 {
-	reverse_proxy cleanuparr:11011
-}
-
-http://profilarr.homelab.tuyens.net:80 {
-	reverse_proxy profilarr:6868
-}
-
